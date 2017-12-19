@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+        #map 
+	    {
+			height: 1000px;
+			width: 100%;
+        }
+		</style>
+	</head>
+	<body>
+		<h1> Google Map </h1>
+		<div id="map"></div>
+
+		<script>
+			function initMap() 
+			{
+				var map = new google.maps.Map(document.getElementById('map'), 
+				{
+				    zoom: 16,
+				    center: {lat: 24.169545, lng: 120.654334}
+				});
+				var icon1 = 
+				{
+					url: "http://tcdgis.ntpc.gov.tw/public/teachimg/%E6%8C%87-41.gif", // url
+					scaledSize: new google.maps.Size(40, 40), // scaled size
+					origin: new google.maps.Point(0,0), // origin
+					anchor: new google.maps.Point(0, 0) // anchor
+				};
+				var icon2 = 
+				{
+					url: "data:image/png;base64,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", // url
+					scaledSize: new google.maps.Size(40, 40), // scaled size
+					origin: new google.maps.Point(0,0), // origin
+					anchor: new google.maps.Point(0, 0) // anchor
+				};
+				//*******加油站1
+				var marker1 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.183082,120.614593),
+					map: map,
+					icon:icon1
+				});
+				var infowindow1 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區台灣大道四段1047號</p>'
+				});
+				google.maps.event.addListener(marker1,'mousemove', function() 
+				{
+					infowindow1.open(map, marker1);
+				});
+				//******加油站2
+				var marker2 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.171323,120.643930),
+					map: map,
+					icon:icon1
+				});
+				var infowindow2 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區青海路二段211號</p>'
+				});
+				google.maps.event.addListener(marker2,'mousemove', function() 
+				{
+					infowindow2.open(map, marker2);
+				});
+				//******加油站3
+				var marker3 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.184418,120.590368),
+					map: map,
+					icon:icon1
+				});
+				var infowindow3 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區西屯路三段90之28號</p>'
+				});
+				google.maps.event.addListener(marker3,'mousemove', function() 
+				{
+					infowindow3.open(map, marker3);
+				});
+				//******加油站4
+				var marker4 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.200782,120.656976),
+					map: map,
+					icon:icon1
+				});
+				var infowindow4 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區西屯路三段77之3號</p>'
+				});
+				google.maps.event.addListener(marker4,'mousemove', function() 
+				{
+					infowindow4.open(map, marker4);
+				});
+				//******加油站5
+				var marker5 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.208176,120.651026),
+					map: map,
+					icon:icon1
+				});
+				var infowindow5 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區台灣大道四段1832號</p>'
+				});
+				google.maps.event.addListener(marker5,'mousemove', function() 
+				{
+					infowindow5.open(map, marker5);
+				});
+				//******加油站6
+				var marker6 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.183941,120.629771),
+					map: map,
+					icon:icon1
+				});
+				var infowindow6 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區環中路二段1286號</p>'
+				});
+				google.maps.event.addListener(marker6,'mousemove', function() 
+				{
+					infowindow6.open(map, marker6);
+				});
+				//******加油站7
+				var marker7 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.163508,120.650468),
+					map: map,
+					icon:icon1
+				});
+				var infowindow7 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區環中路一段2490號</p>'
+				});
+				google.maps.event.addListener(marker7,'mousemove', function() 
+				{
+					infowindow7.open(map, marker7);
+				});
+				//******加油站8
+				var marker8 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.182369,120.633628),
+					map: map,
+					icon:icon1
+				});
+				var infowindow8 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區中清路三段1號</p>'
+				});
+				google.maps.event.addListener(marker8,'mousemove', function() 
+				{
+					infowindow8.open(map, marker8);
+				});
+				//******加油站9
+				var marker9 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.182917,120.601329),
+					map: map,
+					icon:icon1
+				});
+				var infowindow9 = new google.maps.InfoWindow
+				({
+					content: '<p>07台中市西屯區福雅路300號</p>'
+				});
+				google.maps.event.addListener(marker9,'mousemove', function() 
+				{
+					infowindow9.open(map, marker9);
+				});
+				//******加油站10
+				var marker10 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.192622,120.623166),
+					map: map,
+					icon:icon1
+				});
+				var infowindow10 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區文心路三段2號</p>'
+				});
+				google.maps.event.addListener(marker10,'mousemove', function() 
+				{
+					infowindow10.open(map, marker10);
+				});
+				//******加油站11
+				var marker11 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.174953,120.604320),
+					map: map,
+					icon:icon1
+				});
+				var infowindow11 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區工業區八路2號</p>'
+				});
+				google.maps.event.addListener(marker11,'mousemove', function() 
+				{
+					infowindow11.open(map, marker11);
+				});
+				//******加油站12
+				var marker12 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.205147,120.629084),
+					map: map,
+					icon:icon1
+				});
+				var infowindow12 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區環中路三段800號</p>'
+				});
+				google.maps.event.addListener(marker12,'mousemove', function() 
+				{
+					infowindow12.open(map, marker12);
+				});
+				//******加油站13
+				var marker13 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.195164,120.644256),
+					map: map,
+					icon:icon1
+				});
+				var infowindow13 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區安和路49之5號</p>'
+				});
+				google.maps.event.addListener(marker13,'mousemove', function() 
+				{
+					infowindow13.open(map, marker13);
+				});
+				//******加油站14
+				var marker14 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.201209,120.609971),
+					map: map,
+					icon:icon1
+				});
+				var infowindow14 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區台灣大道五段142號</p>'
+				});
+				google.maps.event.addListener(marker14,'mousemove', function() 
+				{
+					infowindow14.open(map, marker14);
+				});
+				//******加油站15
+				var marker15 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.205147,120.629084),
+					map: map,
+					icon:icon1
+				});
+				var infowindow15 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區河南路二段341號</p>'
+				});
+				google.maps.event.addListener(marker15,'mousemove', function() 
+				{
+					infowindow15.open(map, marker15);
+				});
+				//******加油站16
+				var marker16 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.172142,120.645401),
+					map: map,
+					icon:icon1
+				});
+				var infowindow16 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區環中路一段2112號</p>'
+				});
+				google.maps.event.addListener(marker16,'mousemove', function() 
+				{
+					infowindow16.open(map, marker16);
+				});
+				//******加油站17
+				var marker17 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.161804,120.650496),
+					map: map,
+					icon:icon1
+				});
+				var infowindow17 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區台灣大道三段258號</p>'
+				});
+				google.maps.event.addListener(marker17,'mousemove', function() 
+				{
+					infowindow17.open(map, marker17);
+				});
+				//******加油站18
+				var marker18 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.201276,120.662677),
+					map: map,
+					icon:icon1
+				});
+				var infowindow18 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區台灣大道三段258號</p>'
+				});
+				google.maps.event.addListener(marker18,'mousemove', function() 
+				{
+					infowindow18.open(map, marker18);
+				});
+				//******加油站19
+				var marker19 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.166172,120.618963),
+					map: map,
+					icon:icon1
+				});
+				var infowindow9 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區福雅路693號</p>'
+				});
+				google.maps.event.addListener(marker19,'mousemove', function() 
+				{
+					infowindow19.open(map, marker19);
+				});
+				//******郵局1
+				var marker20 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.182416,120.602728),
+					map: map,
+					icon:icon2
+				});
+				var infowindow20 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區台灣大道四段1727號</p>'
+				});
+				google.maps.event.addListener(marker20,'mousemove', function() 
+				{
+					infowindow20.open(map, marker20);
+				});
+				//******郵局2
+				var marker21 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.175272,120.649134),
+					map: map,
+					icon:icon2
+				});
+				var infowindow21 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區河南路2段268號</p>'
+				});
+				google.maps.event.addListener(marker21,'mousemove', function() 
+				{
+					infowindow21.open(map, marker21);
+				});
+				//******郵局3
+				var marker22 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.176690,120.637643),
+					map: map,
+					icon:icon2
+				});
+				var infowindow22 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區黎明路三段130號</p>'
+				});
+				google.maps.event.addListener(marker22,'mousemove', function() 
+				{
+					infowindow22.open(map, marker22);
+				});
+				//******郵局4
+				var marker23 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.164694,120.654240),
+					map: map,
+					icon:icon2
+				});
+				var infowindow23 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區青海路一段83號</p>'
+				});
+				google.maps.event.addListener(marker23,'mousemove', function() 
+				{
+					infowindow23.open(map, marker23);
+				});
+				//******郵局5
+				var marker24 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.156532,120.652867),
+					map: map,
+					icon:icon2
+				});
+				var infowindow24 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區工業區六路10號</p>'
+				});
+				google.maps.event.addListener(marker24,'mousemove', function() 
+				{
+					infowindow24.open(map, marker24);
+				});
+				//******郵局6
+				var marker25 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.175272,120.649134),
+					map: map,
+					icon:icon2
+				});
+				var infowindow25 = new google.maps.InfoWindow
+				({
+					content: '<p>臺中市西屯區臺灣大道4段1650號(台中榮總內)</p>'
+				});
+				google.maps.event.addListener(marker25,'mousemove', function() 
+				{
+					infowindow25.open(map, marker25);
+				});
+				//******郵局7
+				var marker26 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.183789,120.603704),
+					map: map,
+					icon:icon2
+				});
+				var infowindow26 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區永安里西屯路三段166之80號</p>'
+				});
+				google.maps.event.addListener(marker26,'mousemove', function() 
+				{
+					infowindow26.open(map, marker26);
+				});
+				//******郵局8
+				var marker27 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.190603,120.612347),
+					map: map,
+					icon:icon2
+				});
+				var infowindow27 = new google.maps.InfoWindow
+				({
+					content: '<p>40759台中市西屯區大隆路60、62號</p>'
+				});
+				google.maps.event.addListener(marker27,'mousemove', function() 
+				{
+					infowindow27.open(map, marker27);
+				});
+				//******郵局9
+				var marker28 = new google.maps.Marker
+				({
+					position: new google.maps.LatLng(24.183478,120.618559),
+					map: map,
+					icon:icon2
+				});
+				var infowindow28 = new google.maps.InfoWindow
+				({
+					content: '<p>407台中市西屯區福順路318號</p>'
+				});
+				google.maps.event.addListener(marker28,'mousemove', function() 
+				{
+					infowindow28.open(map, marker28);
+				});
+				
+			}
+		</script>
+
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyABnnN5EXkOkvTnLvplb3wj6kTL3nd62zs&callback=initMap">
+		</script>
+	  </body>
+</html>
